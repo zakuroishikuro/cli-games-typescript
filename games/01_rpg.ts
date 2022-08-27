@@ -268,7 +268,7 @@ async function Battle(_monster: MonsterType) {
           // [6-4-38]戦闘処理を抜ける
           return;
         }
-        default: {
+        default: { // メモ：敵のcommandを初期化しておらず、敵が動かなかったので「戦う」をデフォルトにした
           // [6-4-12]戦う
           // [6-4-13]攻撃をするメッセージを表示する
           console.log(`${attacker.name}の　こうげき！`);
