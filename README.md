@@ -33,6 +33,4 @@ npm run rpg
 npm run lifegame
 ```
 
-↓これ
-
-[![alt設定](http://img.youtube.com/vi/yw-j-4xYAN4/0.jpg)](https://www.youtube.com/watch?v=yw-j-4xYAN4)
+これ → https://www.youtube.com/watch?v=yw-j-4xYAN4
