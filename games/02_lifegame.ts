@@ -33,7 +33,7 @@ function DrawField() {
     }
     chars.push('\n'); // [4-1-5]1行描画するごとに改行する
   }
-  console.log(chars.join("")) // メモ：全体を描画
+  console.log(chars.join('')); // メモ：全体を描画
 }
 
 // [4-2]対象のセルと隣接する生きたセルの数を取得する関数を宣言する
