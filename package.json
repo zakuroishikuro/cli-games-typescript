@@ -4,7 +4,8 @@
   "description": "「小一時間でゲームをつくる」のtypescript版",
   "main": "index.js",
   "scripts": {
-    "rpg": "ts-node games/01_rpg.ts"
+    "rpg": "ts-node games/01_rpg.ts",
+    "lifegame": "ts-node games/02_lifegame.ts"
   },
   "author": "zakuroishikuro",
   "license": "MIT",
