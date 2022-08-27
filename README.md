@@ -16,21 +16,31 @@ cd cli-games-typescript
 npm i
 ```
 
-# RPG
+# 遊び方
+
+```sh
+npm run rpg #コマンド選択RPG
+npm run lifegame #ライフゲーム
+npm run reversi #オセロ
+```
+
+## RPG
 
 ![RPG](_img/rpg.png)
 
-```sh
-npm run rpg
-```
-
-コマンド選択はw・sで上下。それ以外のキーは決定。呪文はヒールのみ。
+コマンド選択はw・sで上下。それ以外のキーで決定。呪文はヒールのみ。
 
 
 # ライフゲーム
 
-```sh
-npm run lifegame
-```
-
 これ → https://www.youtube.com/watch?v=yw-j-4xYAN4
+
+操作は出来ない。勝手に動く。
+
+# オセロ
+
+![オセロ](_img/reversi.png)
+
+w・sで上下、a・dで左右移動。それ以外のキーで決定。
+
+フォントによってズレるのが嫌でアレンジ加えたせいで縦長になった。

@@ -2,6 +2,7 @@ import { readSync } from 'fs';
 
 process.stdin.setRawMode(true);
 
+// _getchもどき
 export function _getch() {
   const buffer = Buffer.alloc(10);
   readSync(process.stdin.fd, buffer);
@@ -13,3 +14,7 @@ export function _getch() {
   return userInput;
 }
 
+// printfもどき
+export function printf(prompt: string, ...args: (string | number)[]) {
+  process.stdout.write(prompt.replace(/%(s|d)/g, (m) => `${args.shift() ?? ''}`));
+}

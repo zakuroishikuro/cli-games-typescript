@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "rpg": "ts-node games/01_rpg.ts",
-    "lifegame": "ts-node games/02_lifegame.ts"
+    "lifegame": "ts-node games/02_lifegame.ts",
+    "reversi": "ts-node games/03_reversi.ts"
   },
   "author": "zakuroishikuro",
   "license": "MIT",
