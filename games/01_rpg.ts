@@ -160,7 +160,7 @@ async function SelectCommand() {
     }
 
     // [6-3-10]入力されたキーによって分岐する
-    switch (_getch()) {
+    switch (await _getch()) {
       case 'w': // [6-3-11]wキーが押されたら
         // [6-3-12]上のコマンドに切り替える
         player.command--;
@@ -200,12 +200,12 @@ async function Battle(_monster: MonsterType) {
   console.log(`${monster.name}が　あらわれた！`);
 
   // [6-4-6]キーボード入力を待つ
-  _getch();
+  await _getch();
 
   // [6-4-7]戦闘が終了するまでループする
   while (true) {
     // [6-4-8]コマンドを選択する関数を呼び出す
-    SelectCommand();
+    await SelectCommand(); // メモ：ここにもawait必要
 
     // [6-4-9]各キャラクターを反復する
     for (let i = 0; i < CharacterType.CHARACTER_MAX; i++) {
@@ -225,7 +225,7 @@ async function Battle(_monster: MonsterType) {
             console.log('ＭＰが　たりない！');
 
             // [6-4-25]キーボード入力を待つ
-            _getch();
+            await _getch();
 
             // [6-4-26]呪文を唱える処理を抜ける
             break;
@@ -241,7 +241,7 @@ async function Battle(_monster: MonsterType) {
           console.log(`${attacker.name}は　ヒールを　となえた！`);
 
           // [6-4-30]キーボード入力を待つ
-          _getch();
+          await _getch();
 
           // [6-4-31]HPを回復させる
           attacker.hp = attacker.maxHp;
@@ -253,7 +253,7 @@ async function Battle(_monster: MonsterType) {
           console.log(`${attacker.name}のきずが　かいふくした！`);
 
           // [6-4-34]キーボード入力を待つ
-          _getch();
+          await _getch();
 
           break;
         }
@@ -263,18 +263,19 @@ async function Battle(_monster: MonsterType) {
           console.log(`${attacker.name}は　にげだした！`);
 
           // [6-4-37]キーボード入力を待つ
-          _getch();
+          await _getch();
 
           // [6-4-38]戦闘処理を抜ける
           return;
         }
-        default: { // メモ：敵のcommandを初期化しておらず、敵が動かなかったので「戦う」をデフォルトにした
+        default: {
+          // メモ：敵のcommandを初期化しておらず、敵が動かなかったので「戦う」をデフォルトにした
           // [6-4-12]戦う
           // [6-4-13]攻撃をするメッセージを表示する
           console.log(`${attacker.name}の　こうげき！`);
 
           // [6-4-14]キーボード入力を待つ
-          _getch();
+          await _getch();
 
           // [6-4-15]敵に与えるダメージを計算する
           const damage = 1 + Math.floor(Math.random() * attacker.attack);
@@ -295,7 +296,7 @@ async function Battle(_monster: MonsterType) {
           console.log(`${target.name}に　${damage}　の　ダメージ！`);
 
           // [6-4-21]キーボード入力を待つ
-          _getch();
+          await _getch();
 
           break;
         }
@@ -327,7 +328,7 @@ async function Battle(_monster: MonsterType) {
         }
 
         // [6-4-47]キーボード入力を待つ
-        _getch();
+        await _getch();
 
         // [6-4-48]戦闘シーンの関数を抜ける
         return;
@@ -337,7 +338,7 @@ async function Battle(_monster: MonsterType) {
 }
 
 // [6-6]プログラムの実行開始点を宣言する
-function main() {
+async function main() {
   // [6-6-1]乱数をシャッフルする
   // JavaScriptでは何もしない
 

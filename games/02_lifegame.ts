@@ -1,5 +1,5 @@
 // [1]ヘッダーをインクルードする場所
-import { _getch } from './stdio';
+// import { _getch } from './stdio';
 
 // [2]定数を定義する場所
 

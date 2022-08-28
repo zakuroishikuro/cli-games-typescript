@@ -1,17 +1,22 @@
-import { readSync } from 'fs';
+const { stdin } = process;
 
-process.stdin.setRawMode(true);
+stdin.setEncoding('utf-8');
+stdin.setRawMode(true); // 1キー押すたびに動くようにする
 
-// _getchもどき
-export function _getch() {
-  const buffer = Buffer.alloc(10);
-  readSync(process.stdin.fd, buffer);
-  const userInput = buffer.toString('utf8').replace(/\x00+$/, '');
+// _getchもどき (await必要)
+export function _getch(): Promise<string> {
+  return new Promise((res) => {
+    stdin.resume();
+    stdin.once('data', (data) => {
+      const str = data.toString();
+      console.log('on data: ', str);
+      stdin.pause();
 
-  // Ctrl+Cが押されたら終了
-  if (userInput === '\x03') process.exit(0);
+      if (str === '\x03') process.exit(0);
 
-  return userInput;
+      res(str);
+    });
+  });
 }
 
 // printfもどき

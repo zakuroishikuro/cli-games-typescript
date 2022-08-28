@@ -308,7 +308,7 @@ function DrawScreen() {
 }
 
 // [6-6]モード選択画面の関数を宣言する
-function SelectMode() {
+async function SelectMode() {
   mode = GameMode.MODE_1P; // [6-6-1]ゲームモードを初期化する
 
   // [6-6-2]無限ループする
@@ -331,7 +331,7 @@ function SelectMode() {
     }
 
     // [6-6-10]入力されたキーで分岐する
-    switch (_getch()) {
+    switch (await _getch()) {
       case 'w': // [6-6-11]wキーが押されたら
         mode--; // [6-6-12]前のモードに切り替える
         break;
@@ -395,13 +395,13 @@ function Init() {
 }
 
 // [6-8]石を置くマスを選択する関数を宣言する
-function InputPosition(): VEC2 {
+async function InputPosition(): Promise<VEC2> {
   // [6-8-1]置けるマスが選択されるまで無限ループする
   while (true) {
     DrawScreen(); // [6-8-2]画面を描画する関数を呼び出す
 
     // [6-8-3]入力されたキーによって分岐する
-    switch (_getch()) {
+    switch (await _getch()) {
       case 'w': // [6-8-4]wキーが押されたら
         cursorPosition.y--; // [6-8-5]カーソルを上に移動する
         break;
@@ -428,7 +428,7 @@ function InputPosition(): VEC2 {
           // [6-8-16]置かなかったメッセージを表示し、アラートを鳴らす
           printf('そこには　置けません\x07'); // メモ: `\a`使えないっぽいから`\x07`にする
 
-          _getch(); // [6-8-17]キーボード入力を待つ
+          await _getch(); // [6-8-17]キーボード入力を待つ
         }
 
         break;
@@ -443,7 +443,7 @@ function InputPosition(): VEC2 {
 }
 
 // [6-9]プログラム実行の開始点を宣言する
-function main() {
+async function main() {
   // [6-9-1]乱数をシャッフルする
   // メモ：何もしない
 
@@ -451,7 +451,7 @@ function main() {
   // [6-9-3]空文
   // メモ: 何もしない
 
-  SelectMode(); // [6-9-4]モードを選択する関数を呼び出す
+  await SelectMode(); // [6-9-4]モードを選択する関数を呼び出す
 
   Init(); // [6-9-5]ゲームを初期化する関数を呼び出す
 
@@ -467,7 +467,7 @@ function main() {
 
         DrawScreen(); // [6-9-11]画面を描画する関数を呼び出す
 
-        _getch(); // [6-9-12]キーボード入力を待つ
+        await _getch(); // [6-9-12]キーボード入力を待つ
 
         main(); // [6-9-13]開始ラベルにジャンプする
         return; // メモ：雑だけどいいや
@@ -485,13 +485,13 @@ function main() {
     // [6-9-17]現在のターンの担当がプレイヤーかどうかを判定する
     if (isPlayer[turn]) {
       // [6-9-18]石を置くマスを選択する関数を呼び出す
-      placePosition = InputPosition();
+      placePosition = await InputPosition();
     }
     // [6-9-19]現在のターンの担当がプレイヤーでないなら
     else {
       DrawScreen(); // [6-9-20]盤面を描画する関数を呼び出す
 
-      _getch(); // [6-9-21]キーボード入力を待つ
+      await _getch(); // [6-9-21]キーボード入力を待つ
 
       // [6-9-22]置ける座標を保持するベクターを宣言する
       const positions: VEC2[] = [];
