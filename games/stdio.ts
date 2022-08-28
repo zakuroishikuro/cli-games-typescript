@@ -9,11 +9,8 @@ export function _getch(): Promise<string> {
     stdin.resume();
     stdin.once('data', (data) => {
       const str = data.toString();
-      console.log('on data: ', str);
-      stdin.pause();
-
       if (str === '\x03') process.exit(0);
-
+      stdin.pause();
       res(str);
     });
   });
